@@ -8,7 +8,6 @@ const DriverPage : React.FC = () => {
     const {id} = useParams();
 
     const [driver, setDriver] = useState<Driver| null>();
-    const [image_path, setImagePath] = useState("");
 
     useEffect(() => {
         fetch(`http://localhost:8080/driver/${id}/info`)
@@ -19,12 +18,16 @@ const DriverPage : React.FC = () => {
 
     return (
         <div>
-            <img className="banner" src="/Banners/image.png" alt="profile_picture"/>
+            <img className="banner" src="/Banners/image.png" alt="Banner"/>
             {driver ? (
                 <div>
-                    <DriverResultGrid races={driver.seats.flatMap((x) => x.results)}></DriverResultGrid>
+                    <img src={driver.driver_image_url} alt="Driver profile"/>
+                    <p>{driver.birthday ? (driver.birthday.toString()) : "uwu"}</p>
+                    <div>
+                        <DriverResultGrid races={driver.seats.flatMap((x) => x.results)}></DriverResultGrid>
+                    </div>
                 </div>
-            ) : (
+                ) : (
                 <p>Loading...</p>
             )}
         </div>

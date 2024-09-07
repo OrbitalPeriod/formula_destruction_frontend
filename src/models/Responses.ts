@@ -13,6 +13,8 @@ export interface DriverInfo {
     username : string,
     driver_number : number,
     driver_image_url : string,
+    birthday : Date | null,
+    country : string,
 }
 
 export interface Driver{
@@ -20,6 +22,8 @@ export interface Driver{
     username : string,
     driver_number : number,
     driver_image_url : string,
+    birthday : Date | null,
+    country : string,
     seats : Seat[],
 }
 
