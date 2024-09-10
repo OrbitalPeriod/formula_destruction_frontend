@@ -3,6 +3,8 @@ import {useParams} from 'react-router-dom';
 import {ApiResponse, Driver} from "../models/Responses";
 import DriverResultGrid from "./DriverResultGrid";
 import "./DriverPage.css";
+import calculateAge from "../utils";
+
 
 const DriverPage : React.FC = () => {
     const {id} = useParams();
@@ -22,16 +24,30 @@ const DriverPage : React.FC = () => {
             {driver ? (
                 <div>
                     <img src={driver.driver_image_url} alt="Driver profile"/>
-                    <p>{driver.birthday ? (driver.birthday.toString()) : "uwu"}</p>
+                    <p>{driver.username}</p>
+                    <p>{driver.birthday ? (driver.birthday.toString()) : "9 september 2001"}</p>
+                    <p>Driver nationality: {driver.country}</p>
+                    {driver.birthday ? (<p> Age: {calculateAge(new Date(driver.birthday))}</p>) : null}
+                    {driver.birthday ? (<p>Birthday: {driver.birthday.toString()}</p>) : null}
+
+                    <div>
+                        <h1>Driver stats:</h1>
+                        Races started: {driver.seats.flatMap((x) => x.results).filter((x) => x.position !== 100).length}
+                        Driver championships: {}
+                        //TODO: Add the stats once they have been inplemented in the backend
+                    </div>
+
                     <div>
                         <DriverResultGrid races={driver.seats.flatMap((x) => x.results)}></DriverResultGrid>
                     </div>
                 </div>
-                ) : (
+            ) : (
                 <p>Loading...</p>
             )}
         </div>
     );
 }
+
+
 
 export default DriverPage;
