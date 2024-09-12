@@ -25,6 +25,13 @@ export interface Driver{
     birthday : Date | null,
     country : string,
     seats : Seat[],
+    season_results : SeasonResult[],
+}
+
+export interface SeasonResult{
+    driver_result : number,
+    team_result : number,
+    season : number,
 }
 
 export interface Seat{

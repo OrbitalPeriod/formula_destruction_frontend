@@ -33,8 +33,8 @@ const DriverPage : React.FC = () => {
                     <div>
                         <h1>Driver stats:</h1>
                         Races started: {driver.seats.flatMap((x) => x.results).filter((x) => x.position !== 100).length}
-                        Driver championships: {}
-                        //TODO: Add the stats once they have been inplemented in the backend
+                        Driver championships: {driver.season_results.filter((x) => x.driver_result == 1).length}
+                        Constructor championships : {driver.season_results.filter((x) => x.team_result == 1).length}
                     </div>
 
                     <div>
